@@ -1,0 +1,25 @@
+---
+
+- name: Setup Azure VM
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  become: no
+
+  tasks:
+    - name: Create virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "an-resource-group"
+        name: "an-vm"
+        address_prefixes: "10.0.0.0/16"
+    - name: Add subnet
+      azure_rm_subnet:
+        resource_group: "an-resource-group"
+        name: "an-vm"
+        address_prefix: "10.0.1.0/24"
+        virtual_network: "an-vm"
+    - name: Create public IP address
+      azure_rm_publicipaddress:
+        resource_group: "an-resource-group"
+        allocation_method: Static
+        name: "an-vm"

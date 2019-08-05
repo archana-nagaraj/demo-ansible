@@ -1,0 +1,13 @@
+---
+
+- name: Setup Azure VM
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  become: no
+
+  tasks:
+    - name: Create a resource group
+      azure_rm_resourcegroup:
+        name: "an-resource-group"
+        location: "westus"

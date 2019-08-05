@@ -1,0 +1,21 @@
+---
+
+- name: Setup Azure VM
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  become: no
+
+  tasks:
+    - name: Create VM with defaults
+      azure_rm_virtualmachine: 
+        resource_group: an-resource-group
+        name: an-vm
+        admin_username: archanadevops2
+        admin_password: FirstP@55word
+        image:
+          offer: CentOS
+          publisher: OpenLogic
+          sku: '7.1'
+          version: latest
+        vm_size: Standard_B1ls
